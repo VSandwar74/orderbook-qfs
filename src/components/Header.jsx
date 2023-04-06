@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { useState, useEffect, useLayoutEffect } from 'react'
-// import { doc, onSnapshot } from "firebase/firestore";
+import { useState, useEffect } from 'react'
 
 
-import { collection, doc, query, onSnapshot, addDoc, setDoc, getDocs, FieldValue, serverTimestamp, where, limit, orderBy, updateDoc, increment, deleteDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc, } from "firebase/firestore";
 
 const Header = (props) => {
   const {auth, db} = props
@@ -25,7 +24,7 @@ const Header = (props) => {
   }, [])
 
   const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
-    console.log(doc.data())
+    // console.log(doc.data())
     setCash(doc.data().cash)
     setExposure(doc.data().exposure)
   });
@@ -43,15 +42,6 @@ const Header = (props) => {
           Cash: {cash}
           {"    "}
           Exposure: {exposure}
-            {/* {
-              useEffect(() => {
-                return (
-                  <p>
-                  </p>
-                )
-              }, [cash, exposure])
-            } */}
-            
         </h2>
     </div>
   )

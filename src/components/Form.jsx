@@ -28,12 +28,10 @@ const Form = (props) => {
         
         console.log('sent')
     
-        // const {uid} = auth.currentUser;
         const isBid = bidOrAsk == 'bid';
     
         async function updateCounter(counterParty, resting, isBid) {
-          // console.log(counterParty)
-          // const counterPartyRef = doc(db, "users", counterParty);
+
           await updateDoc(doc(db, "users", counterParty), {
             cash: increment((isBid ? -resting : resting)),
             exposure: increment((isBid ? 1 : -1))
@@ -41,7 +39,7 @@ const Form = (props) => {
         }
     
         async function updateSelf(resting, isBid) {
-          // const selfRef = doc(db, "users", auth.currentUser.uid);
+
           await updateDoc(doc(db, "users", auth.currentUser.uid), {
             cash: increment((isBid ? -resting : resting)),
             exposure: increment((isBid ? 1 : -1))
@@ -58,7 +56,7 @@ const Form = (props) => {
             setResting(doc.data().value)
       
             console.log(doc.data().value)
-            // console.log(resting)
+
             if (isBid) {
               if (doc.data().value && value >= doc.data().value) {
                 updateCounter(counterParty, resting, !isBid)
