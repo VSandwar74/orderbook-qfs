@@ -26,37 +26,36 @@ const Form = (props) => {
     async function sendTrade(e) {
         e.preventDefault()
         
-        console.log('sent')
-    
+        
         const isBid = bidOrAsk == 'bid';
-    
+        
         async function updateCounter(counterParty, resting, isBid) {
-
+          
           await updateDoc(doc(db, "users", counterParty), {
             cash: increment((isBid ? -resting : resting)),
             exposure: increment((isBid ? 1 : -1))
           });
         }
-    
+        
         async function updateSelf(resting, isBid) {
-
+          
           await updateDoc(doc(db, "users", auth.currentUser.uid), {
             cash: increment((isBid ? -resting : resting)),
             exposure: increment((isBid ? 1 : -1))
           });
         }
-    
-    
+        
+        
         const q = query(collection(db, "orders"), where("bidOrAsk", "==", ((isBid) ? "ask" : "bid")), orderBy('value', ((isBid) ? "asc" : "desc")), limit(1));
         const querySnapshot = await getDocs(q);
-        if (querySnapshot) {
+        if (querySnapshot.docs.length != 0) {
           querySnapshot.forEach((doc) => {
-      
+            
             setCounterParty(doc.data().uid)
             setResting(doc.data().value)
-      
+            
             console.log(doc.data().value)
-
+            
             if (isBid) {
               if (doc.data().value && value >= doc.data().value) {
                 updateCounter(counterParty, resting, !isBid)
