@@ -1,24 +1,9 @@
 import React from 'react'
 
-import { initializeApp } from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-
-
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-
-// const auth = getAuth();
-// const db = getFirestore(app);
-
 import Header from './Header';
 import Title from './Title';
 import Form from './Form';
 import Table from './Table';
-
-// const auth = firebase.auth();
-// const firestore = firebase.firestore();
-
 
 const TradingRoom = (props) => {
 
@@ -39,6 +24,9 @@ const TradingRoom = (props) => {
           <Table db={db} />
         </div>
       </div>
+        <div className="absolute bottom-0 text-white">
+            <p>Made by Vishakh Sandwar</p>
+        </div>
       </div>
     )
   };

@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
+// import { doc, onSnapshot } from "firebase/firestore";
+
 
 import { collection, doc, query, onSnapshot, addDoc, setDoc, getDocs, FieldValue, serverTimestamp, where, limit, orderBy, updateDoc, increment, deleteDoc } from "firebase/firestore";
 
@@ -21,9 +23,15 @@ const Header = (props) => {
     }
     createUser()
   }, [])
-  
+
+  const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
+    console.log(doc.data())
+    setCash(doc.data().cash)
+    setExposure(doc.data().exposure)
+  });
+
   return (
-    <div className="flex flex-row justify-between w-full">
+    <div className="flex flex-row justify-between w-full p-10">
         <p className="text-white">
             {name}
         </p>
@@ -32,9 +40,18 @@ const Header = (props) => {
             src="//images.squarespace-cdn.com/content/v1/54455593e4b026d1c3c6f497/1440969142293-6K3214PMOD4KKR42OWPQ/QFS+Original2.png?format=1500w" 
             alt="NYU Quantitative Finance Society"/>
         <h2 className="text-white">
-            Cash: {cash}
-            {"    "}
-            Exposure: {exposure}
+          Cash: {cash}
+          {"    "}
+          Exposure: {exposure}
+            {/* {
+              useEffect(() => {
+                return (
+                  <p>
+                  </p>
+                )
+              }, [cash, exposure])
+            } */}
+            
         </h2>
     </div>
   )

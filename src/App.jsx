@@ -1,7 +1,8 @@
 import './App.css'
 
-import SignIn from './SignIn';
-import TradingRoom from './TradingRoom';
+// import SignIn from './SignIn';
+// import TradingRoom from './TradingRoom';
+import { SignIn, TradingRoom } from './components';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { initializeApp } from 'firebase/app';
 

@@ -5,12 +5,16 @@ import React from 'react'
 import 'firebase/firestore';
 import 'firebase/auth';
 
-import './App.css'
+import { FcGoogle } from 'react-icons/fc';
+
 import Typewriter from "typewriter-effect";
 import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 
 const SignIn = () => {
+
+    const auth = getAuth()
 
     function signInWithGoogle(auth) {
       const provider = new GoogleAuthProvider();
@@ -18,8 +22,8 @@ const SignIn = () => {
     }
   
     return (
-      <div>
-        <h1>
+      <div className="flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
+        <h1 className="text-5xl text-white mt-[20%]">
           <Typewriter
             onInit={(typewriter)=> {
   
@@ -34,7 +38,18 @@ const SignIn = () => {
             }}
           />
         </h1>
-        <button onClick={() => signInWithGoogle(auth)} >Sign in with Google!</button>
+
+        <button 
+            onClick={() => signInWithGoogle(auth)} 
+            className="flex flex-row items-center bg-white rounded-[20px] p-4 mt-20"
+            >
+            <FcGoogle
+                className="mr-4"
+            />
+            <p className="text-black"> 
+                Sign in with Google!
+            </p>    
+        </button>
       </div>
     )
   }
