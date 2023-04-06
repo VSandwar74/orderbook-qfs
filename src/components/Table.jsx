@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useState } from 'react'
 
-import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
 
 
 
@@ -12,7 +12,7 @@ const Table = (props) => {
   const [bids, setBids] = useState([])
 
 
-  const orderQuery = query(collection(db, "orders"), orderBy('value', 'asc'));
+  const orderQuery = query(collection(db, "orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
   const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
     const trades = [];
     querySnapshot.forEach((doc) => {

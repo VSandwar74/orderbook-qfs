@@ -98,7 +98,7 @@ const Form = (props) => {
             placeholder="Value" 
             onChange={(e) => setValue(e.target.value)} />
         <button 
-            className="text-center bg-white p-1 px-10 rounded-full"
+            className="text-center bg-white p-1 px-10 rounded-full hover:bg-blue-500 hover:text-white cursor-pointer"
             type="submit"
         >
             Submit
