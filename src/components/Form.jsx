@@ -29,22 +29,22 @@ const Form = (props) => {
         
         const isBid = bidOrAsk == 'bid';
         
-        async function updateCounter(counterParty, resting, isBid) {
-          
-          await updateDoc(doc(db, "users", counterParty), {
+        async function updateParties(counterParty, resting, isBid, ref) {
+
+          const otherRef = doc(db, "users", counterParty);
+          const selfRef = doc(db, "users", auth.currentUser.uid);
+
+          await updateDoc(otherRef, {
+            cash: increment((!isBid ? -resting : resting)),
+            exposure: increment((!isBid ? 1 : -1))
+          });
+          await updateDoc(selfRef, {
             cash: increment((isBid ? -resting : resting)),
             exposure: increment((isBid ? 1 : -1))
           });
+          await deleteDoc(ref)
+
         }
-        
-        async function updateSelf(resting, isBid) {
-          
-          await updateDoc(doc(db, "users", auth.currentUser.uid), {
-            cash: increment((isBid ? -resting : resting)),
-            exposure: increment((isBid ? 1 : -1))
-          });
-        }
-        
         
         const q = query(collection(db, "orders"), where("bidOrAsk", "==", ((isBid) ? "ask" : "bid")), orderBy('value', ((isBid) ? "asc" : "desc")), limit(1));
         const querySnapshot = await getDocs(q);
@@ -58,17 +58,13 @@ const Form = (props) => {
             
             if (isBid) {
               if (doc.data().value && value >= doc.data().value) {
-                updateCounter(counterParty, resting, !isBid)
-                updateSelf(resting, isBid)
-                deleteDoc(doc.ref)
+                updateParties(counterParty, doc.data().value, isBid, doc.ref)
               } else {
                 postTrade()
               }
             } else {
               if (doc.data().value && value <= doc.data().value) {
-                updateCounter(counterParty, resting, !isBid)
-                updateSelf(resting, isBid)
-                deleteDoc(doc.ref)
+                updateParties(counterParty, doc.data().value, isBid, doc.ref)
               } else {
                 postTrade()
               }
