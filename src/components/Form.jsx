@@ -23,53 +23,50 @@ const Form = (props) => {
       });
     }
 
+    async function updateParties(counterParty, resting, isBid, ref) {
+
+      const otherRef = doc(db, "users", counterParty);
+      const selfRef = doc(db, "users", auth.currentUser.uid);
+
+      await updateDoc(otherRef, {
+        cash: increment((!isBid ? -resting : resting)),
+        exposure: increment((!isBid ? 1 : -1))
+      });
+      await updateDoc(selfRef, {
+        cash: increment((isBid ? -resting : resting)),
+        exposure: increment((isBid ? 1 : -1))
+      });
+      await deleteDoc(ref)
+
+    }
+
     async function sendTrade(e) {
-        e.preventDefault()
         
-        
-        const isBid = bidOrAsk == 'bid';
-        
-        async function updateParties(counterParty, resting, isBid, ref) {
+      e.preventDefault()
+      
+      
+      const isBid = bidOrAsk == 'bid';
+      
+      
+      const q = query(collection(db, "orders"), where("bidOrAsk", "==", ((isBid) ? "ask" : "bid")), orderBy('value', ((isBid) ? "asc" : "desc")), limit(1));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.docs.length != 0) {
 
-          const otherRef = doc(db, "users", counterParty);
-          const selfRef = doc(db, "users", auth.currentUser.uid);
+        querySnapshot.forEach((doc) => {
+          ((isBid && doc.data().value && value >= doc.data().value) || !isBid && doc.data().value && value <= doc.data().value) ?
+          (updateParties(doc.data().uid, doc.data().value, isBid, doc.ref)) :
+          (postTrade())
 
-          await updateDoc(otherRef, {
-            cash: increment((!isBid ? -resting : resting)),
-            exposure: increment((!isBid ? 1 : -1))
-          });
-          await updateDoc(selfRef, {
-            cash: increment((isBid ? -resting : resting)),
-            exposure: increment((isBid ? 1 : -1))
-          });
-          await deleteDoc(ref)
-
-        }
+          console.log(doc.data().value)
+        });
         
-        const q = query(collection(db, "orders"), where("bidOrAsk", "==", ((isBid) ? "ask" : "bid")), orderBy('value', ((isBid) ? "asc" : "desc")), limit(1));
-        const querySnapshot = await getDocs(q);
-        if (querySnapshot.docs.length != 0) {
-          querySnapshot.forEach((doc) => {
-
-            
-            (isBid) ?
-            ((doc.data().value && value >= doc.data().value) ?
-            updateParties(doc.data().uid, doc.data().value, isBid, doc.ref) :
-            postTrade()
-            ) : (
-              ((doc.data().value && value <= doc.data().value)) ?
-              updateParties(doc.data().uid, doc.data().value, isBid, doc.ref) : 
-              postTrade()
-              )
-              console.log(doc.data().value)
-          });
-        } else {
-          postTrade()
-        }
-        
-        setValue(0)
-        setBidOrAsk('')
+      } else {
+        postTrade()
       }
+      
+      setValue(0)
+      setBidOrAsk('')
+    }
 
   return (
     <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
