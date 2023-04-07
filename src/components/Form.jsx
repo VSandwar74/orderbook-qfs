@@ -10,8 +10,8 @@ const Form = (props) => {
 
     const [value, setValue] = useState(0)
     const [bidOrAsk, setBidOrAsk] = useState('')
-    const [resting, setResting] = useState(0)
-    const [counterParty, setCounterParty] = useState('')
+    // const [resting, setResting] = useState(0)
+    // const [counterParty, setCounterParty] = useState('')
 
     async function postTrade() {
       await addDoc(collection(db, "orders"), {
@@ -50,25 +50,18 @@ const Form = (props) => {
         const querySnapshot = await getDocs(q);
         if (querySnapshot.docs.length != 0) {
           querySnapshot.forEach((doc) => {
+
             
-            setCounterParty(doc.data().uid)
-            setResting(doc.data().value)
-            
-            console.log(doc.data().value)
-            
-            if (isBid) {
-              if (doc.data().value && value >= doc.data().value) {
-                updateParties(counterParty, doc.data().value, isBid, doc.ref)
-              } else {
-                postTrade()
-              }
-            } else {
-              if (doc.data().value && value <= doc.data().value) {
-                updateParties(counterParty, doc.data().value, isBid, doc.ref)
-              } else {
-                postTrade()
-              }
-            }
+            (isBid) ?
+            ((doc.data().value && value >= doc.data().value) ?
+            updateParties(doc.data().uid, doc.data().value, isBid, doc.ref) :
+            postTrade()
+            ) : (
+              ((doc.data().value && value <= doc.data().value)) ?
+              updateParties(doc.data().uid, doc.data().value, isBid, doc.ref) : 
+              postTrade()
+              )
+              console.log(doc.data().value)
           });
         } else {
           postTrade()
