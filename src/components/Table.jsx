@@ -1,25 +1,17 @@
 import React from 'react'
 
-import { useState } from 'react'
 
-import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
 
 
 
 
 const Table = (props) => {
-  const { db } = props 
-  const [bids, setBids] = useState([])
+
+  const { db, bids } = props 
+  const orders = bids.map(bids => bids[0]);
+//   console.log(orders)
 
 
-  const orderQuery = query(collection(db, "orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
-  const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
-    const trades = [];
-    querySnapshot.forEach((doc) => {
-        trades.push(doc.data());
-    });
-    setBids(trades)
-  });
 
   return (
     <table className="table-auto w-full justify-between">
@@ -33,7 +25,7 @@ const Table = (props) => {
             </tr>
         </thead>
         <tbody>
-            {bids && bids.map((order, i) => {
+            {orders && orders.map((order, i) => {
                 const isBid = order.bidOrAsk == 'bid'
                 if (isBid) {
                 return (
