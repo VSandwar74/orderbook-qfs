@@ -17,13 +17,13 @@ const Table = (props) => {
         <table className="table-auto w-full justify-between">
             <thead className="">
                 <tr className="">
-                    <th className="underline text-red-500"> Cancel</th>
+                    <th className="underline "> Cancel</th>
                     <th className="underline"> User</th>
                     <th className="underline"> Bid</th>
                     <th className="underline"> Value</th>
                     <th className="underline"> Ask</th>
                     <th className="underline"> User</th>
-                    <th className="underline text-red-500"> Cancel</th>
+                    <th className="underline"> Cancel</th>
                 </tr>
             </thead>
             <tbody>
