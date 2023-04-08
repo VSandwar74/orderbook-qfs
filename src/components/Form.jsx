@@ -62,16 +62,24 @@ const Form = (props) => {
       setBidOrAsk('')
     }
 
-
-
   return (
     <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
-        <input 
+        {/* <input 
             className="outline-4 rounded-full text-center"
             value={bidOrAsk} 
             placeholder="Bid or Ask?" 
             onChange={(e) => setBidOrAsk(e.target.value)} 
-        />
+        /> */}
+        <div>
+          <select 
+            className="text-center bg-white p-1 px-12 rounded-full"
+            id="dropdown" 
+            value={bidOrAsk} 
+            onChange={(e) => setBidOrAsk(e.target.value)}>
+            <option className="text-center" value="bid">Bid</option>
+            <option value="ask">Ask</option>
+          </select>
+        </div>
         <input 
             className="outline-4 rounded-full text-center"
             type='number'
