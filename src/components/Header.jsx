@@ -23,11 +23,15 @@ const Header = (props) => {
     createUser()
   }, [])
 
-  const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), { includeMetadataChanges: true }, (doc) => {
-    // console.log(doc.data())
-    setCash(doc.data().cash)
-    setExposure(doc.data().exposure)
-  });
+  useEffect(() => {
+    const unsubscribe = onSnapshot(doc(db, "users", auth.currentUser.uid), { includeMetadataChanges: true }, (doc) => {
+      setCash(doc.data().cash);
+      setExposure(doc.data().exposure);
+    });
+    
+    // return a function that unsubscribes from the snapshot listener
+    return () => unsubscribe();
+  }, []);  
 
   return (
     <div className="flex flex-row justify-between w-full p-10">

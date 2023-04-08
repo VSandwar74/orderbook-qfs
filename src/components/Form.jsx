@@ -64,12 +64,6 @@ const Form = (props) => {
 
   return (
     <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
-        {/* <input 
-            className="outline-4 rounded-full text-center"
-            value={bidOrAsk} 
-            placeholder="Bid or Ask?" 
-            onChange={(e) => setBidOrAsk(e.target.value)} 
-        /> */}
         <div>
           <select 
             className="text-center bg-white p-1 px-12 rounded-full"
