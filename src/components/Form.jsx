@@ -9,7 +9,7 @@ const Form = (props) => {
     const { auth, db, bids } = props
 
     const [value, setValue] = useState(0)
-    const [bidOrAsk, setBidOrAsk] = useState('')
+    const [bidOrAsk, setBidOrAsk] = useState('bid')
 
     async function postTrade() {
       await addDoc(collection(db, "orders"), {
@@ -59,7 +59,7 @@ const Form = (props) => {
       )
       
       setValue(0)
-      setBidOrAsk('')
+      setBidOrAsk('bid')
     }
 
   return (
