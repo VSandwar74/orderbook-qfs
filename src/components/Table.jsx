@@ -14,7 +14,7 @@ const Table = (props) => {
 
 
   return (
-    <div className="overflow-y-auto w-full">
+    <div className="overflow-y-auto w-full h-[80%]">
         <table className="table-auto w-full justify-between">
             <thead className="">
                 <tr className="">
