@@ -3,7 +3,7 @@ import Typewriter from "typewriter-effect";
 
 const Title = () => {
   return (
-    <h1 className="text-5xl" >
+    <h1 className="text-5xl mt-8" >
         {/* Welcome to the QFS trading floor! */}
         <Typewriter
           onInit={(typewriter)=> {
