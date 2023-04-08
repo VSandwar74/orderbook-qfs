@@ -1,4 +1,4 @@
-import { SignIn, TradingRoom } from './screens';
+import { SignIn, TradingRoom, Room } from './screens';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import * as firebase from './services/firebase';
 
@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {user ? <TradingRoom /> : <SignIn/> }
+      {user ? <Room /> : <SignIn/> }
     </div>
   )
 }
