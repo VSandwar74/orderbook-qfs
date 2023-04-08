@@ -9,7 +9,7 @@ const Form = (props) => {
     const { auth, db, bids } = props
 
     const [value, setValue] = useState(0)
-    const [bidOrAsk, setBidOrAsk] = useState('')
+    const [bidOrAsk, setBidOrAsk] = useState('bid')
 
     async function postTrade() {
       await addDoc(collection(db, "orders"), {
@@ -59,19 +59,21 @@ const Form = (props) => {
       )
       
       setValue(0)
-      setBidOrAsk('')
+      setBidOrAsk('bid')
     }
-
-
 
   return (
     <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
-        <input 
-            className="outline-4 rounded-full text-center"
+        <div>
+          <select 
+            className="text-center bg-white p-1 px-12 rounded-full"
+            id="dropdown" 
             value={bidOrAsk} 
-            placeholder="Bid or Ask?" 
-            onChange={(e) => setBidOrAsk(e.target.value)} 
-        />
+            onChange={(e) => setBidOrAsk(e.target.value)}>
+            <option className="text-center" value="bid">Bid</option>
+            <option value="ask">Ask</option>
+          </select>
+        </div>
         <input 
             className="outline-4 rounded-full text-center"
             type='number'
