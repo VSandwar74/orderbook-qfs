@@ -11,7 +11,7 @@ import * as firebase from '../services/firebase';
 
 const TradingRoom = () => {
 
-    const {auth, db} = firebase
+    const {db} = firebase
     const [bids, setBids] = useState([])
 
     useEffect(() => {
