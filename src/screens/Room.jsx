@@ -2,18 +2,8 @@ import React, { useEffect } from 'react'
 import * as firebase from '../services/firebase';
 import Typewriter from "typewriter-effect";
 import { useState } from 'react'
-import customEffect from '../hooks/CustHook';
-// import { customEffect } from '../hooks/CustHook'
-// import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-// import { getAuth } from "firebase/auth";
 import { collection, doc, query, addDoc, getDocs, setDoc, serverTimestamp, where, limit, orderBy, updateDoc, increment, deleteDoc } from "firebase/firestore";
 
-
-// import { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-
-// import { collection, doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../services/firebase';
     
 const Room = ( props ) => {
 
@@ -94,24 +84,24 @@ const Room = ( props ) => {
             <div className="flex flex-row w-full justify-center">
                 <button
                     onClick={() => createRoom()} 
-                    className="flex flex-row items-center bg-white rounded-[20px] p-4 px-6 m-20"
+                    className="flex flex-row text-black items-center bg-white rounded-[20px] p-4 px-6 m-20 hover:bg-blue-500 hover:text-white"
                     >
-                    <p className="text-black"> 
+                    <p className=""> 
                         Create Room
                     </p>    
                 </button>
                 <button 
                     onClick={() => joinRoom()} 
-                    className="flex flex-row items-center bg-white rounded-[20px] p-4 px-6 m-20"
+                    className="flex flex-row text-black items-center bg-white rounded-[20px] p-4 px-6 m-20 hover:bg-blue-500 hover:text-white"
                     >
-                    <p className="text-black"> 
+                    <p className=""> 
                         Join Room
                     </p>    
                 </button>
-                <p>
-                    {error}
-                </p>
             </div>
+            <p className="text-white" >
+                {error}
+            </p>
         </div>
   )
 }
