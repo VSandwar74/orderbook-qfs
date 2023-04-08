@@ -45,7 +45,7 @@ const TradingRoom = (props) => {
           <Title />
           <Form auth={auth} db={db} bids={bids}/>
         <div className='flex flex-row w-full justify-center mt-1'>
-          <Table db={db} bids={bids}/>
+          <Table auth={auth} db={db} bids={bids}/>
         </div>
       </div>
         <div className="absolute bottom-0 text-white">
