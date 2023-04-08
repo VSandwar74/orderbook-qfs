@@ -21,6 +21,12 @@ const Form = (props) => {
       });
     }
 
+    async function marketOrder(isBid) {
+      setValue((isBid) ? (1e10) : (0))
+      setBidOrAsk((isBid) ? ('bid') : ('ask'))
+      sendTrade()
+    }
+
     async function updateParties(counterParty, resting, isBid, ref) {
 
       const otherRef = doc(db, "users", counterParty);
@@ -85,6 +91,20 @@ const Form = (props) => {
             type="submit"
         >
             Submit
+        </button>
+        <button 
+            className="text-center bg-white p-1 px-10 rounded-full hover:bg-green-500 hover:text-white cursor-pointer"
+            type="submit"
+            onClick={() => marketOrder(true)}
+        >
+            Buy
+        </button>
+        <button 
+            className="text-center bg-white p-1 px-10 rounded-full hover:bg-red-500 hover:text-white cursor-pointer"
+            type="submit"
+            onClick={() => marketOrder(false)}
+        >e
+            Sell
         </button>
     </form>
   )
