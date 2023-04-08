@@ -14,15 +14,17 @@ const Table = (props) => {
 
 
   return (
-    <div className="overflow-y-auto w-full h-[80%]">
+    <div className="overflow-y-auto w-full h-[90%]">
         <table className="table-auto w-full justify-between">
             <thead className="">
                 <tr className="">
+                    {/* <th className="underline"> Cancel</th> */}
                     <th className="underline"> User</th>
                     <th className="underline"> Bid</th>
                     <th className="underline"> Value</th>
                     <th className="underline"> Ask</th>
                     <th className="underline"> User</th>
+                    {/* <th className="underline"> Cancel</th> */}
                 </tr>
             </thead>
             <tbody>

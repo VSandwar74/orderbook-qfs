@@ -32,17 +32,6 @@ const TradingRoom = (props) => {
       };
     }, []);
 
-    // const orderQuery = query(collection(db, "orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
-    // const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
-    //   const trades = [];
-    //   const refs = [];
-    //   querySnapshot.forEach((doc) => {
-    //       trades.push(doc.data());
-    //       refs.push(doc.ref);
-    //   });
-    //   setBids(trades)
-    //   setRefs(refs)
-    // });
 
     return (
       <div className='flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500'>
@@ -52,7 +41,7 @@ const TradingRoom = (props) => {
             db={db}
           />
         </div>
-        <div className="w-3/4 h-4/6 flex flex-col rounded-[20px] justify-center items-center bg-white/75 mt-10 p-10">
+        <div className="w-3/4 h-4/6 flex flex-col rounded-[20px] items-center bg-white/75 mt-10 px-10">
           <Title />
           <Form auth={auth} db={db} bids={bids}/>
         <div className='flex flex-row w-full justify-center mt-1'>
