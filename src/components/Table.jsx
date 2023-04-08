@@ -8,8 +8,8 @@ import React from 'react'
 const Table = (props) => {
 
   const { db, bids } = props 
-  const orders = bids.map(bids => bids[0]);
-//   console.log(orders)
+//   const orders = bids.map(bids => bids[0]);
+//   console.log(bids)
 
 
 
@@ -25,7 +25,7 @@ const Table = (props) => {
             </tr>
         </thead>
         <tbody>
-            {orders && orders.map((order, i) => {
+            {bids && bids.map((order, i) => {
                 const isBid = order.bidOrAsk == 'bid'
                 if (isBid) {
                 return (

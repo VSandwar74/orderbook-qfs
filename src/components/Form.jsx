@@ -6,12 +6,12 @@ import { collection, doc, query, addDoc, getDocs, serverTimestamp, where, limit,
 
 const Form = (props) => {    
 
-    const { auth, db, trades } = props
+    const { auth, db, bids, refs } = props
 
     const [value, setValue] = useState(0)
     const [bidOrAsk, setBidOrAsk] = useState('')
     // const [resting, setResting] = useState(0)
-    const bids = trades.map(trades => trades[0]);
+    // const bids = trades.map(trades => trades[0/]);
     // const [counterParty, setCounterParty] = useState('')
 
     async function postTrade() {
@@ -51,7 +51,9 @@ const Form = (props) => {
       const onesideds = bids.filter(item => item.bidOrAsk === (isBid ? 'ask' : 'bid'));
       const index = (isBid ? 0 : onesideds.length-1)
       const bestOffer = onesideds[index].value
-      const docRef = trades[bids.indexOf(onesideds[index])][1]
+
+      // const docRef = trades[bids.indexOf(onesideds[index])][1]
+      const docRef = refs[bids.indexOf(onesideds[index])]
       console.log(docRef);
       
       // console.log(bids)
