@@ -1,3 +1,3 @@
 # Checkout our Orderbook!
 
-qfs-orderbook.netlify.app
+qfsorderbook.netlify.app
