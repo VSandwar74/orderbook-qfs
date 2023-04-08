@@ -34,7 +34,7 @@ const TradingRoom = (props) => {
             db={db}
           />
         </div>
-        <div className="w-3/4 flex flex-col rounded-[20px] justify-center items-center bg-white/75 mt-10 p-10">
+        <div className="w-3/4 h-4/6 flex flex-col rounded-[20px] justify-center items-center bg-white/75 mt-10 p-10">
           <Title />
           <Form auth={auth} db={db} bids={bids} refs={refs}/>
         <div className='flex flex-row w-full justify-center mt-1'>
