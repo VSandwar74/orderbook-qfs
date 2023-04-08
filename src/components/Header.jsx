@@ -23,7 +23,7 @@ const Header = (props) => {
     createUser()
   }, [])
 
-  const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
+  const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), { includeMetadataChanges: true }, (doc) => {
     // console.log(doc.data())
     setCash(doc.data().cash)
     setExposure(doc.data().exposure)
