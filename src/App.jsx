@@ -1,4 +1,4 @@
-import { SignIn, TradingRoom } from './components';
+import { SignIn, TradingRoom } from './screens';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import * as firebase from './services/firebase';
 

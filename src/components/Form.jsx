@@ -25,7 +25,7 @@ const Form = (props) => {
     async function marketOrder(isBid) {
       setValue((isBid) ? (1e10) : (0))
       setBidOrAsk((isBid) ? ('bid') : ('ask'))
-      sendTrade()
+      // sendTrade()
     }
 
     async function updateParties(counterParty, resting, isBid, ref) {

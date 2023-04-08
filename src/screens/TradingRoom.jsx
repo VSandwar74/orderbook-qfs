@@ -1,9 +1,15 @@
 import React from 'react'
 
-import Header from './Header';
-import Title from './Title';
-import Form from './Form';
-import Table from './Table';
+// import Header from '../components/Header';
+// import Title from '../components/Title';
+// import Form from '../components/Form';
+// import Table from '../components/Table';
+import {
+  Header,
+  Title,
+  Form,
+  Table
+} from '../components';
 
 import { useState, useEffect } from 'react'
 import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
