@@ -7,17 +7,17 @@ import Table from './Table';
 
 import { useState, useEffect } from 'react'
 import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
+import * as firebase from '../services/firebase';
 
-const TradingRoom = (props) => {
+const TradingRoom = () => {
 
-    const {auth, db} = props
+    const {auth, db} = firebase
     const [bids, setBids] = useState([])
 
     useEffect(() => {
       const orderQuery = query(collection(db, "orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
       const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
         const trades = [];
-        const refs = [];
         querySnapshot.forEach((doc) => {
             trades.push({
               ref: doc.ref,
@@ -36,16 +36,13 @@ const TradingRoom = (props) => {
     return (
       <div className='flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500'>
         <div className="flex flex-col items-center w-full">
-          <Header
-            auth={auth}
-            db={db}
-          />
+          <Header/>
         </div>
         <div className="w-3/4 h-4/6 flex flex-col rounded-[20px] items-center bg-white/75 mt-10 px-10">
           <Title />
-          <Form auth={auth} db={db} bids={bids}/>
+          <Form bids={bids}/>
         <div className='flex flex-row w-full justify-center mt-1'>
-          <Table auth={auth} db={db} bids={bids}/>
+          <Table bids={bids}/>
         </div>
       </div>
         <div className="absolute bottom-0 text-white">

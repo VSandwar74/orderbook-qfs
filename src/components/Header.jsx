@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { useState, useEffect } from 'react'
-
+import * as firebase from '../services/firebase';
 
 import { doc, onSnapshot, setDoc, } from "firebase/firestore";
 
-const Header = (props) => {
-  const {auth, db} = props
+const Header = () => {
+  const {auth, db} = firebase
 
   const name = auth.currentUser.displayName;
   const [cash, setCash] = useState(0)

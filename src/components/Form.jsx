@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import { collection, doc, query, addDoc, getDocs, serverTimestamp, where, limit, orderBy, updateDoc, increment, deleteDoc } from "firebase/firestore";
-
+import * as firebase from '../services/firebase';
 
 
 const Form = (props) => {    
 
-    const { auth, db, bids } = props
+    const { auth, db } = firebase
+    const { bids } = props
 
     const [value, setValue] = useState(0)
     const [bidOrAsk, setBidOrAsk] = useState('bid')

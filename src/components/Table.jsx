@@ -1,6 +1,6 @@
 import { deleteDoc } from 'firebase/firestore'
 import React from 'react'
-
+import * as firebase from '../services/firebase';
 
 
 
@@ -8,7 +8,8 @@ import React from 'react'
 
 const Table = (props) => {
 
-  const { auth, db, bids } = props 
+  const { auth, db } = firebase
+  const { bids } = props 
 
 
 
