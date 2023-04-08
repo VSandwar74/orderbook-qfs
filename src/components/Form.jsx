@@ -7,13 +7,13 @@ import * as firebase from '../services/firebase';
 const Form = (props) => {    
 
     const { auth, db } = firebase
-    const { bids } = props
+    const { bids, roomId } = props
 
     const [value, setValue] = useState(0)
     const [bidOrAsk, setBidOrAsk] = useState('bid')
 
     async function postTrade() {
-      await addDoc(collection(db, "orders"), {
+      await addDoc(collection(db, "rooms", roomId, "orders"), {
         value: Number(value),
         bidOrAsk,
         uid: auth.currentUser.uid,
@@ -30,8 +30,8 @@ const Form = (props) => {
 
     async function updateParties(counterParty, resting, isBid, ref) {
 
-      const otherRef = doc(db, "users", counterParty);
-      const selfRef = doc(db, "users", auth.currentUser.uid);
+      const otherRef = doc(db, "rooms", roomId ,"users", counterParty);
+      const selfRef = doc(db, "rooms", roomId, "users", auth.currentUser.uid);
 
       await updateDoc(otherRef, {
         cash: increment((!isBid ? -resting : resting)),

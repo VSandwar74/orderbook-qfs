@@ -14,14 +14,17 @@ import {
 import { useState, useEffect } from 'react'
 import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
 import * as firebase from '../services/firebase';
+import { useParams } from 'react-router-dom';
 
-const TradingRoom = () => {
 
+const TradingRoom = ( props ) => {
+
+    const { roomDoc } = props;
     const {db} = firebase
     const [bids, setBids] = useState([])
 
     useEffect(() => {
-      const orderQuery = query(collection(db, "orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
+      const orderQuery = query(collection(db, "rooms", roomDoc.ref.id ,"orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
       const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
         const trades = [];
         querySnapshot.forEach((doc) => {
@@ -42,11 +45,11 @@ const TradingRoom = () => {
     return (
       <div className='flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500'>
         <div className="flex flex-col items-center w-full">
-          <Header/>
+          <Header roomId={roomDoc.ref.id} roomName={roomDoc.name} />
         </div>
         <div className="w-3/4 h-4/6 flex flex-col rounded-[20px] items-center bg-white/75 mt-10 px-10">
-          <Title />
-          <Form bids={bids}/>
+          <Title roomName={roomDoc.name}/>
+          <Form bids={bids} roomId={roomDoc.ref.id}/>
         <div className='flex flex-row w-full justify-center mt-1'>
           <Table bids={bids}/>
         </div>
