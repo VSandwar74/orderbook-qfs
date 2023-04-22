@@ -24,7 +24,7 @@ const TradingRoom = ( props ) => {
     const [bids, setBids] = useState([])
 
     useEffect(() => {
-      const orderQuery = query(collection(db, "rooms", roomDoc.ref.id ,"orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'));
+      const orderQuery = query(collection(db, "rooms", roomDoc.ref.id ,"orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'), orderBy('timestamp', 'asc'));
       const unsubscribe = onSnapshot(orderQuery, (querySnapshot) => {
         const trades = [];
         querySnapshot.forEach((doc) => {
