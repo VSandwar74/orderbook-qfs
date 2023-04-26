@@ -42,8 +42,8 @@ const Form = (props) => {
         exposure: increment((isBid ? 1 : -1))
       });
       await addDoc(collection(db, "rooms", roomId, "ledger"), {
-        buyer: (isBid ? name : auth.currentUser.displayName),
-        seller: (isBid ? auth.currentUser.displayName : name),
+        buyer: (isBid ? auth.currentUser.displayName : name),
+        seller: (isBid ? name : auth.currentUser.displayName),
         amount: resting,
         timestamp: serverTimestamp(),
       });
