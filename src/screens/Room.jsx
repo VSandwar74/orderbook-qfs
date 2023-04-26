@@ -17,7 +17,7 @@ const Room = ( props ) => {
         const q = query(collection(db, "rooms"), where("name", "==", roomName), limit(1));
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
-            console.log(querySnapshot.docs[0])
+            // console.log(querySnapshot.docs[0])
             return querySnapshot.docs[0]
         } else {
             setError('Incorrect room key.')

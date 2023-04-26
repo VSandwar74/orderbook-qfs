@@ -1,0 +1,19 @@
+{
+    "trades": [
+    {
+      "buyer": "Jason",
+      "seller": "Tyler",
+      "amount": 20
+    },
+    {
+      "buyer": "Sarah",
+      "seller": "John",
+      "amount": 50
+    },
+    {
+      "buyer": "Mike",
+      "seller": "Lisa",
+      "amount": 10
+    }
+  ]
+}

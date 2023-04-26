@@ -28,7 +28,7 @@ const Form = (props) => {
       // sendTrade()
     }
 
-    async function updateParties(counterParty, resting, isBid, ref) {
+    async function updateParties(counterParty, resting, isBid, ref, name) {
 
       const otherRef = doc(db, "rooms", roomId ,"users", counterParty);
       const selfRef = doc(db, "rooms", roomId, "users", auth.currentUser.uid);
@@ -40,6 +40,12 @@ const Form = (props) => {
       await updateDoc(selfRef, {
         cash: increment((isBid ? -resting : resting)),
         exposure: increment((isBid ? 1 : -1))
+      });
+      await addDoc(collection(db, "rooms", roomId, "ledger"), {
+        buyer: (isBid ? name : auth.currentUser.displayName),
+        seller: (isBid ? auth.currentUser.displayName : name),
+        amount: resting,
+        timestamp: serverTimestamp(),
       });
       await deleteDoc(ref)
 
@@ -58,7 +64,7 @@ const Form = (props) => {
       (onesideds.length != 0) ?
       (
         ((isBid && value >= bestOffer.value) || !isBid && value <= bestOffer.value) ?
-          (updateParties(bestOffer.uid, bestOffer.value, isBid, bestOffer.ref)) :
+          (updateParties(bestOffer.uid, bestOffer.value, isBid, bestOffer.ref, bestOffer.name)) :
           (postTrade())
       ) : 
       (
