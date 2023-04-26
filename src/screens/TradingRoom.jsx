@@ -44,7 +44,7 @@ const TradingRoom = ( props ) => {
     }, []);
 
     useEffect(() => {
-      const ledgerQuery = query(collection(db, "rooms", roomDoc.ref.id, "ledger"), orderBy('timestamp', 'asc'), limit(5))
+      const ledgerQuery = query(collection(db, "rooms", roomDoc.ref.id, "ledger"), orderBy('timestamp', 'desc'), limit(5))
       const unsub = onSnapshot(ledgerQuery, (querySnapshot) => {
         const tx = [];
         querySnapshot.forEach((doc) => {
