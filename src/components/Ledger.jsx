@@ -1,7 +1,7 @@
 import { deleteDoc } from 'firebase/firestore'
 import React from 'react'
 import * as firebase from '../services/firebase';
-import trades from '../assets/trades.json';
+// import trades from '../assets/trades.json';
 
 const Ledger = (props) => {
     const { ledger } = props;
