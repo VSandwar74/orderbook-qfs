@@ -7,11 +7,15 @@ const Title = ( ) => {
       <h1 className="text-5xl mt-8" >
           {/* Welcome to the QFS trading floor! */}
           <Typewriter
+            options={{
+              delay: 50,
+              deleteSpeed: 50,
+            }}
             onInit={(typewriter)=> {
 
             typewriter
             
-            .typeString("Welcome to the QFS Trading Floor!")
+            .typeString("Welcome to the NOM Trading Floor!")
               
             .pauseFor(1000)
             .deleteAll()

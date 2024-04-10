@@ -28,55 +28,57 @@ const Form = (props) => {
       // sendTrade()
     }
 
-    async function updateParties(counterParty, resting, isBid, ref, name) {
+    // async function updateParties(counterParty, resting, isBid, ref, name) {
 
-      const otherRef = doc(db, "rooms", roomId ,"users", counterParty);
-      const selfRef = doc(db, "rooms", roomId, "users", auth.currentUser.uid);
+    //   const otherRef = doc(db, "rooms", roomId ,"users", counterParty);
+    //   const selfRef = doc(db, "rooms", roomId, "users", auth.currentUser.uid);
 
-      await updateDoc(otherRef, {
-        cash: increment((!isBid ? -resting : resting)),
-        exposure: increment((!isBid ? 1 : -1))
-      });
-      await updateDoc(selfRef, {
-        cash: increment((isBid ? -resting : resting)),
-        exposure: increment((isBid ? 1 : -1))
-      });
-      await addDoc(collection(db, "rooms", roomId, "ledger"), {
-        buyer: (isBid ? auth.currentUser.displayName : name),
-        seller: (isBid ? name : auth.currentUser.displayName),
-        amount: resting,
-        timestamp: serverTimestamp(),
-      });
-      await deleteDoc(ref)
+    //   await updateDoc(otherRef, {
+    //     cash: increment((!isBid ? -resting : resting)),
+    //     exposure: increment((!isBid ? 1 : -1))
+    //   });
+    //   await updateDoc(selfRef, {
+    //     cash: increment((isBid ? -resting : resting)),
+    //     exposure: increment((isBid ? 1 : -1))
+    //   });
+    //   await addDoc(collection(db, "rooms", roomId, "ledger"), {
+    //     buyer: (isBid ? auth.currentUser.displayName : name),
+    //     seller: (isBid ? name : auth.currentUser.displayName),
+    //     amount: resting,
+    //     timestamp: serverTimestamp(),
+    //   });
+    //   await deleteDoc(ref)
 
-    }
+    // }
 
-    async function sendTrade(e) {
+    // async function sendTrade(e) {
         
-      e.preventDefault()
+    //   e.preventDefault()
 
-      const isBid = bidOrAsk == 'bid';
+    //   const isBid = bidOrAsk == 'bid';
 
-      const onesideds = bids.filter(item => item.bidOrAsk === (isBid ? 'ask' : 'bid'));
-      const index = (isBid ? 0 : onesideds.length-1)
-      const bestOffer = onesideds[index];
+    //   const onesideds = bids.filter(item => item.bidOrAsk === (isBid ? 'ask' : 'bid'));
+    //   const index = (isBid ? 0 : onesideds.length-1)
+    //   const bestOffer = onesideds[index];
 
-      (onesideds.length != 0) ?
-      (
-        ((isBid && value >= bestOffer.value) || !isBid && value <= bestOffer.value) ?
-          (updateParties(bestOffer.uid, bestOffer.value, isBid, bestOffer.ref, bestOffer.name)) :
-          (postTrade())
-      ) : 
-      (
-        postTrade()
-      )
+    //   (onesideds.length != 0) ?
+    //   (
+    //     ((isBid && value >= bestOffer.value) || !isBid && value <= bestOffer.value) ?
+    //       (updateParties(bestOffer.uid, bestOffer.value, isBid, bestOffer.ref, bestOffer.name)) :
+    //       (postTrade())
+    //   ) : 
+    //   (
+    //     postTrade()
+    //   )
       
-      setValue(0)
-      setBidOrAsk('bid')
-    }
+    //   setValue(0)
+    //   setBidOrAsk('bid')
+    // }
 
   return (
-    <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
+    <form 
+      // onSubmit
+     className="flex flex-row w-full justify-around p-10">
         <div>
           <select 
             className="text-center bg-white p-1 px-12 rounded-full"
