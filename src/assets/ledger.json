@@ -1,0 +1,32 @@
+[
+        {
+          "amount": 1,
+          "buyer": "Alice",
+          "seller": "Bob",
+          "timestamp": "February 2, 2024 at 9:10:12 PM UTC-5"
+        },
+        {
+          "amount": 25,
+          "buyer": "Charlie",
+          "seller": "David",
+          "timestamp": "February 2, 2024 at 9:10:12 PM UTC-5"
+        },
+        {
+          "amount": 50,
+          "buyer": "Emma",
+          "seller": "Frank",
+          "timestamp": "February 2, 2024 at 9:10:12 PM UTC-5"
+        },
+        {
+          "amount": 75,
+          "buyer": "Grace",
+          "seller": "Henry",
+          "timestamp": "February 2, 2024 at 9:10:12 PM UTC-5"
+        },
+        {
+          "amount": 99,
+          "buyer": "Ivy",
+          "seller": "Jack",
+          "timestamp": "February 2, 2024 at 9:10:12 PM UTC-5"
+        }
+    ]      
