@@ -7,6 +7,10 @@ const Title = ( ) => {
       <h1 className="text-5xl mt-8" >
           {/* Welcome to the QFS trading floor! */}
           <Typewriter
+            options={{
+              delaySpeed: 50,
+              deleteSpeed: 50,
+            }}
             onInit={(typewriter)=> {
 
             typewriter

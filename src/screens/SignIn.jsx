@@ -22,6 +22,10 @@ const SignIn = () => {
       <div className="flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
         <h1 className="text-5xl text-white mt-[20%]">
           <Typewriter
+            options={{
+              delaySpeed: 50,
+              deleteSpeed: 50,
+            }}
             onInit={(typewriter)=> {
   
             typewriter
