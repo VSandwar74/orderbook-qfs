@@ -29,20 +29,18 @@ const Table = (props) => {
             </thead>
             <tbody>
                 {bids && bids.map((order, i) => {
-                    // const myOrder = order.uid == auth.currentUser.uid
+                    const myOrder = order.uid == auth.currentUser.uid
                     const isBid = order.bidOrAsk == 'bid'
                     if (isBid) {
                     return (
                         <tr key={i} className="">
-                            {/* {(myOrder) ? 
+                            {(myOrder) ? 
                                 (<td 
                                     className="text-center cursor-pointer hover:text-red-500"
-                                    // onClick={() => (deleteDoc(order.ref))}
-                                    >
+                                    onClick={() => (deleteDoc(order.ref))}>
                                     x
                                 </td>) : 
-                                (<td className="text-center"></td>)} */}
-                            <td className="text-center"></td>
+                                (<td className="text-center"></td>)}
                             <td className="text-center">{order.name}</td>
                             <td className="text-center">{order.bidOrAsk}</td>
                             <td className="text-center">{order.value}</td>
@@ -60,15 +58,13 @@ const Table = (props) => {
                             <td className="text-center">{order.value}</td>
                             <td className="text-center">{order.bidOrAsk}</td>
                             <td className="text-center">{order.name}</td>
-                            <td className="text-center"></td>
-                            {/* {(myOrder) ? 
+                            {(myOrder) ? 
                                 (<td 
                                     className="text-center cursor-pointer hover:text-red-500"
-                                    // onClick={() => (deleteDoc(order.ref))}
-                                    >
+                                    onClick={() => (deleteDoc(order.ref))}>
                                     x
                                 </td>) : 
-                                (<td className="text-center"></td>)} */}
+                                (<td className="text-center"></td>)}
                         </tr>
                     )
                     }
