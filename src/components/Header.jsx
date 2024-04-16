@@ -38,6 +38,8 @@ const Header = (props) => {
     // console.log(canTrade)
   }, [canTrade])
 
+  console.log(auth.currentUser.uid)
+
   return (
     <div className="flex flex-row justify-between w-full p-10">
         <div>
@@ -70,6 +72,7 @@ const Header = (props) => {
             Exposure: {exposure}
           </h2>
               {canTrade ? 
+              // {canTrade && (auth.currentUser.uid === "hLJaqwJ4FBX5e7y77sOyhPByutv1") ? 
                 <button
                 onClick={() => setCanTrade(false)} 
                 className="flex flex-row text-black text-center items-center bg-white rounded-[20px] p-4 py-2 hover:bg-red-500 hover:text-white"
