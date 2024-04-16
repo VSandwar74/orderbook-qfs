@@ -7,7 +7,7 @@ import { doc, onSnapshot, setDoc, } from "firebase/firestore";
 
 const Header = (props) => {
   const {auth, db} = firebase
-  const { roomId, roomName, setCanTrade, setRoomDoc } = props;
+  const { roomId, roomName, canTrade, setCanTrade, setRoomDoc } = props;
 
   const name = auth.currentUser.displayName;
   const [cash, setCash] = useState(0)
@@ -34,6 +34,10 @@ const Header = (props) => {
     return () => unsubscribe();
   }, []);  
 
+  useEffect(() => {
+    // console.log(canTrade)
+  }, [canTrade])
+
   return (
     <div className="flex flex-row justify-between w-full p-10">
         <div>
@@ -59,11 +63,28 @@ const Header = (props) => {
               alt="NYU Quantitative Finance Society"
               />
         </a>
+        <div className='flex flex-col items-center'>
           <h2 className="font-bold text-white">
             Cash: {cash}
             {"    "}
             Exposure: {exposure}
           </h2>
+              {canTrade ? 
+                <button
+                onClick={() => setCanTrade(false)} 
+                className="flex flex-row text-black text-center items-center bg-white rounded-[20px] p-4 py-2 hover:bg-red-500 hover:text-white"
+              >
+                <p className="">Stop Trading</p> 
+              </button>
+              : 
+              <button
+                onClick={() => setCanTrade(true)} 
+                className="flex flex-row text-black text-center items-center bg-white rounded-[20px] p-4 py-2 hover:bg-green-500 hover:text-white"
+              >
+                <p className="">Start Trading</p> 
+              </button>
+              } 
+        </div>
     </div>
   )
 }

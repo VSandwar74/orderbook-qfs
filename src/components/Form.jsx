@@ -53,12 +53,13 @@ const Form = (props) => {
     }
 
     async function sendTrade(e) {
+      
+      e.preventDefault()
+      
       if (canTrade == false) {
         return
       }
-        
-      e.preventDefault()
-
+      
       const isBid = bidOrAsk == 'bid';
 
       const onesideds = bids.filter(item => item.bidOrAsk === (isBid ? 'ask' : 'bid'));

@@ -66,7 +66,7 @@ const TradingRoom = ( props ) => {
     return (
       <div className='flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500'>
         <div className="flex flex-col items-center w-full">
-          <Header roomId={roomDoc.ref.id} roomName={roomDoc.name} setCanTrade={setCanTrade} setRoomDoc={setRoomDoc} />
+          <Header roomId={roomDoc.ref.id} roomName={roomDoc.name} canTrade={canTrade} setCanTrade={setCanTrade} setRoomDoc={setRoomDoc} />
         </div>
         <div className='w-full flex flex-row px-12'>
           <div className="w-3/4 h-[512px] flex flex-col rounded-[20px] items-center bg-white/75 mt-10 px-10">
