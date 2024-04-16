@@ -7,12 +7,13 @@ import * as firebase from '../services/firebase';
 const Form = (props) => {    
 
     const { auth, db } = firebase
-    const { bids, roomId } = props
+    const { bids, roomId, canTrade } = props
 
     const [value, setValue] = useState(0)
     const [bidOrAsk, setBidOrAsk] = useState('bid')
 
     async function postTrade() {
+      setValue(Math.round(value))
       await addDoc(collection(db, "rooms", roomId, "orders"), {
         value: Number(value),
         bidOrAsk,
@@ -52,6 +53,9 @@ const Form = (props) => {
     }
 
     async function sendTrade(e) {
+      if (canTrade == false) {
+        return
+      }
         
       e.preventDefault()
 
@@ -72,20 +76,28 @@ const Form = (props) => {
       )
       
       setValue(0)
-      setBidOrAsk('bid')
+      // setBidOrAsk('bid')
     }
 
   return (
     <form onSubmit={sendTrade} className="flex flex-row w-full justify-around p-10">
         <div>
-          <select 
+        {/* <form> */}
+        <div className='flex flex-row space-x-2 w-full'>
+          <input type="radio" value="bid" name="gender" /> 
+          <p>Bid</p>
+          <input type="radio" value="ask" name="gender" className='pl-16' /> 
+          <p>Ask</p>
+        </div>
+        {/* </form> */}
+          {/* <select 
             className="text-center bg-white p-1 px-12 rounded-full"
             id="dropdown" 
             value={bidOrAsk} 
             onChange={(e) => setBidOrAsk(e.target.value)}>
             <option className="text-center" value="bid">Bid</option>
             <option value="ask">Ask</option>
-          </select>
+          </select> */}
         </div>
         <input 
             className="outline-4 rounded-full text-center"

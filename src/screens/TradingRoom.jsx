@@ -20,10 +20,11 @@ import Ledger from '../components/Ledger';
 
 const TradingRoom = ( props ) => {
 
-    const { roomDoc } = props;
+    const { roomDoc, setRoomDoc } = props;
     const {db} = firebase
     const [bids, setBids] = useState([])
     const [ledger, setLedger] = useState([])
+    const [canTrade, setCanTrade] = useState(true)
 
     useEffect(() => {
       const orderQuery = query(collection(db, "rooms", roomDoc.ref.id ,"orders"), where('bidOrAsk', 'in', ['bid', 'ask']), orderBy('value', 'asc'), orderBy('timestamp', 'asc'));
@@ -65,12 +66,12 @@ const TradingRoom = ( props ) => {
     return (
       <div className='flex flex-col items-center w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500'>
         <div className="flex flex-col items-center w-full">
-          <Header roomId={roomDoc.ref.id} roomName={roomDoc.name} />
+          <Header roomId={roomDoc.ref.id} roomName={roomDoc.name} setCanTrade={setCanTrade} setRoomDoc={setRoomDoc} />
         </div>
         <div className='w-full flex flex-row px-12'>
           <div className="w-3/4 h-[512px] flex flex-col rounded-[20px] items-center bg-white/75 mt-10 px-10">
             <Title roomName={roomDoc.name}/>
-            <Form bids={bids} roomId={roomDoc.ref.id}/>
+            <Form bids={bids} roomId={roomDoc.ref.id} canTrade={canTrade}/>
           <div className='flex flex-row w-full justify-center mt-1'>
             <Table bids={bids}/>
           </div>

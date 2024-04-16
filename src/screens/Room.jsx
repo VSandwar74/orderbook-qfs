@@ -62,6 +62,10 @@ const Room = ( props ) => {
             {/* <p>{location.pathname}</p> */}
             <h1 className="text-5xl text-white mt-[20%]">
                 <Typewriter
+                    options={{
+                        delaySpeed: 50,
+                        deleteSpeed: 50,
+                    }}
                     onInit={(typewriter)=> {
 
                     typewriter

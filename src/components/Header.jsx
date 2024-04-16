@@ -7,7 +7,7 @@ import { doc, onSnapshot, setDoc, } from "firebase/firestore";
 
 const Header = (props) => {
   const {auth, db} = firebase
-  const { roomId, roomName } = props;
+  const { roomId, roomName, setCanTrade, setRoomDoc } = props;
 
   const name = auth.currentUser.displayName;
   const [cash, setCash] = useState(0)
@@ -43,6 +43,14 @@ const Header = (props) => {
           <p className="text-white">
             Room Name: {roomName}   
           </p>   
+          <button
+              onClick={() => setRoomDoc('')} 
+              className="flex flex-row text-black text-center items-center bg-white rounded-[20px] p-4 py-2 hover:bg-blue-500 hover:text-white"
+            >
+              <p className=""> 
+                Return
+              </p>    
+          </button>
         </div>
         <a href="http://quantfsnyu.com/" className="w-2/12 flex flex-col items-center justify-center">
           <img 
@@ -51,11 +59,11 @@ const Header = (props) => {
               alt="NYU Quantitative Finance Society"
               />
         </a>
-        <h2 className="font-bold text-white">
-          Cash: {cash}
-          {"    "}
-          Exposure: {exposure}
-        </h2>
+          <h2 className="font-bold text-white">
+            Cash: {cash}
+            {"    "}
+            Exposure: {exposure}
+          </h2>
     </div>
   )
 }
